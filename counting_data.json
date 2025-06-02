@@ -1,0 +1,147 @@
+{
+  "1282026562740289606": {
+    "channel_id": 1375942302928863403,
+    "current_number": 28,
+    "last_user": 859682975041191946,
+    "highest_count": 28,
+    "total_counts": 114,
+    "enabled": true,
+    "allow_same_user": false,
+    "reset_on_mistake": true,
+    "counting_role": null,
+    "save_progress": true,
+    "milestones": [
+      100,
+      500,
+      1000,
+      2500,
+      5000,
+      10000
+    ],
+    "leaderboard": {
+      "267305778619088896": 29,
+      "829408777010020402": 14,
+      "739010172034351114": 7,
+      "1157734320153313351": 20,
+      "958606774942978058": 12,
+      "1054013135918481509": 17,
+      "979138845062868992": 5,
+      "567611197315088385": 2,
+      "1206002927492403271": 3,
+      "933915454626467900": 2,
+      "1324162500798976081": 1,
+      "1146926486616547349": 1,
+      "859682975041191946": 1
+    },
+    "mistakes": 24,
+    "resets": 24,
+    "last_reset": "2025-05-24T21:37:47.178833",
+    "streak_record": 14,
+    "fun_mode": true,
+    "auto_react": true,
+    "delete_wrong_messages": true,
+    "strict_mode": true,
+    "only_numbers": true,
+    "kick_on_spam": false,
+    "spam_threshold": 3,
+    "user_violations": {
+      "267305778619088896": {
+        "count": 0,
+        "last_violation": "2025-05-24T21:34:36.356457"
+      },
+      "979138845062868992": {
+        "count": 2,
+        "last_violation": "2025-05-24T22:38:27.766451"
+      },
+      "1157734320153313351": {
+        "count": 2,
+        "last_violation": "2025-05-24T21:34:55.296420"
+      },
+      "567611197315088385": {
+        "count": 2,
+        "last_violation": "2025-05-24T21:38:01.570562"
+      },
+      "1146926486616547349": {
+        "count": 1,
+        "last_violation": "2025-05-25T04:16:31.424533"
+      }
+    },
+    "mute_violators": false,
+    "violation_timeout": 60
+  },
+  "1374869078451163309": {
+    "channel_id": null,
+    "current_number": 0,
+    "last_user": null,
+    "highest_count": 0,
+    "total_counts": 0,
+    "enabled": false,
+    "allow_same_user": false,
+    "reset_on_mistake": true,
+    "counting_role": null,
+    "save_progress": true,
+    "milestones": [
+      100,
+      500,
+      1000,
+      2500,
+      5000,
+      10000
+    ],
+    "leaderboard": {},
+    "mistakes": 0,
+    "resets": 0,
+    "last_reset": null,
+    "streak_record": 0,
+    "fun_mode": false,
+    "auto_react": true,
+    "delete_wrong_messages": true,
+    "strict_mode": true,
+    "only_numbers": true,
+    "kick_on_spam": false,
+    "spam_threshold": 3,
+    "user_violations": {
+      "267305778619088896": {
+        "count": 1,
+        "last_violation": "2025-05-24T21:31:41.571297"
+      }
+    },
+    "mute_violators": true,
+    "violation_timeout": 60
+  },
+  "1376103032688873553": {
+    "channel_id": null,
+    "current_number": 0,
+    "last_user": null,
+    "highest_count": 0,
+    "total_counts": 0,
+    "enabled": false,
+    "allow_same_user": false,
+    "reset_on_mistake": true,
+    "counting_role": null,
+    "save_progress": true,
+    "milestones": [
+      100,
+      500,
+      1000,
+      2500,
+      5000,
+      10000
+    ],
+    "leaderboard": {},
+    "mistakes": 0,
+    "resets": 0,
+    "last_reset": null,
+    "streak_record": 0,
+    "fun_mode": false,
+    "auto_react": true,
+    "delete_wrong_messages": true,
+    "strict_mode": true,
+    "only_numbers": true,
+    "kick_on_spam": false,
+    "spam_threshold": 3,
+    "user_violations": {},
+    "mute_violators": true,
+    "violation_timeout": 60
+  }
+}

@@ -1,0 +1,2589 @@
+{
+    "name": "Cephalo",
+    "icon_url": "https://cdn.discordapp.com/icons/1282026562740289606/1a83eb56ecd1853ef5f57fffa45a09b2.png?size=1024",
+    "created_at": "2024-09-07 17:15:51.459000+00:00",
+    "categories": [
+        {
+            "name": "\ud83d\udcdcImportant",
+            "position": 0,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 1024,
+                    "deny": 2048
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "id": 1283767109205233786
+        },
+        {
+            "name": "\ud83d\udcacCommunity",
+            "position": 1,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 49152
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "id": 1282026562740289607
+        },
+        {
+            "name": "\ud83e\udd16Bot Playground/Commands",
+            "position": 2,
+            "overwrites": [
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "id": 1367887073499156530
+        },
+        {
+            "name": "\ud83d\udd0aVoice channels",
+            "position": 3,
+            "overwrites": [
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "id": 1282026562740289608
+        },
+        {
+            "name": "\ud83c\udf33Minecraft",
+            "position": 4,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 1024,
+                    "deny": 0
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "id": 1283770307785658433
+        },
+        {
+            "name": "\ud83d\udc6eStaff",
+            "position": 5,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1049600
+                },
+                {
+                    "id": 1294671831537680488,
+                    "type": "role",
+                    "name": "Minecraft Staff",
+                    "allow": 1049600,
+                    "deny": 0
+                },
+                {
+                    "id": 1294671778769141760,
+                    "type": "role",
+                    "name": "Discord Staff",
+                    "allow": 1049600,
+                    "deny": 0
+                }
+            ],
+            "id": 1294668683318394951
+        },
+        {
+            "name": "tickets",
+            "position": 6,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1049600
+                },
+                {
+                    "id": 1294671778769141760,
+                    "type": "role",
+                    "name": "Discord Staff",
+                    "allow": 1049600,
+                    "deny": 0
+                }
+            ],
+            "id": 1322364579229073499
+        }
+    ],
+    "channels": [
+        {
+            "name": "ticket-logs",
+            "type": "text",
+            "position": 41,
+            "category_id": 1322364579229073499,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1049600
+                },
+                {
+                    "id": 1294671778769141760,
+                    "type": "role",
+                    "name": "Discord Staff",
+                    "allow": 1049600,
+                    "deny": 0
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udd17smp-link",
+            "type": "text",
+            "position": 25,
+            "category_id": 1283770307785658433,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": "0/20 players online | 4 unique players ever joined | Server online for 150 minutes | Last update: Wed, 21. May 2025 21:59:58 GMT"
+        },
+        {
+            "name": "\u2753support",
+            "type": "text",
+            "position": 7,
+            "category_id": 1283767109205233786,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 1024,
+                    "deny": 2048
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\ude22I am lonely",
+            "type": "voice",
+            "position": 2,
+            "category_id": 1282026562740289608,
+            "overwrites": [
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\u23ebbump",
+            "type": "text",
+            "position": 20,
+            "category_id": 1367887073499156530,
+            "overwrites": [
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udcb8patreon",
+            "type": "text",
+            "position": 36,
+            "category_id": 1294668683318394951,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 3072
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "warns-evidence",
+            "type": "text",
+            "position": 30,
+            "category_id": 1294668683318394951,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1294671831537680488,
+                    "type": "role",
+                    "name": "Minecraft Staff",
+                    "allow": 1024,
+                    "deny": 0
+                },
+                {
+                    "id": 1294671778769141760,
+                    "type": "role",
+                    "name": "Discord Staff",
+                    "allow": 1024,
+                    "deny": 0
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udcf7mc-media",
+            "type": "text",
+            "position": 26,
+            "category_id": 1283770307785658433,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 1024,
+                    "deny": 0
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 5,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\u2705verify",
+            "type": "text",
+            "position": 0,
+            "category_id": null,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 1024,
+                    "deny": 103079217152
+                },
+                {
+                    "id": 1295852195585069137,
+                    "type": "role",
+                    "name": "\u300cLevels 0-4\u300d",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udea8mod-applications",
+            "type": "text",
+            "position": 3,
+            "category_id": 1283767109205233786,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 1024,
+                    "deny": 2048
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udcacmc-general",
+            "type": "text",
+            "position": 24,
+            "category_id": 1283770307785658433,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 1024,
+                    "deny": 0
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83c\udf8froles",
+            "type": "text",
+            "position": 4,
+            "category_id": 1283767109205233786,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 1024,
+                    "deny": 2048
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "super-secret-channel",
+            "type": "text",
+            "position": 38,
+            "category_id": 1294668683318394951,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1321493934622380125,
+                    "type": "role",
+                    "name": "super secret role",
+                    "allow": 1024,
+                    "deny": 0
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udc4dsuggestions",
+            "type": "forum",
+            "position": 16,
+            "category_id": 1282026562740289607,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 51200,
+                    "deny": 0
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "ticket-goblin00262",
+            "type": "text",
+            "position": 45,
+            "category_id": 1322364579229073499,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1374855942621106199,
+                    "type": "role",
+                    "name": "Tickets v2",
+                    "allow": 2147601472,
+                    "deny": 0
+                },
+                {
+                    "id": 1294671778769141760,
+                    "type": "role",
+                    "name": "Discord Staff",
+                    "allow": 66560,
+                    "deny": 2112
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": "Manually Verify"
+        },
+        {
+            "name": "mod-application-reviews",
+            "type": "text",
+            "position": 39,
+            "category_id": 1294668683318394951,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1295064547446755358,
+                    "type": "role",
+                    "name": "Minecraft Admin",
+                    "allow": 1024,
+                    "deny": 0
+                },
+                {
+                    "id": 1295064503641182280,
+                    "type": "role",
+                    "name": "Discord Admin",
+                    "allow": 1024,
+                    "deny": 0
+                },
+                {
+                    "id": 1295064288305614973,
+                    "type": "role",
+                    "name": "Minecraft Manager",
+                    "allow": 1024,
+                    "deny": 0
+                },
+                {
+                    "id": 1295064344400367719,
+                    "type": "role",
+                    "name": "Minecraft Sr Admin",
+                    "allow": 1024,
+                    "deny": 0
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udd3aTrio",
+            "type": "voice",
+            "position": 3,
+            "category_id": 1282026562740289608,
+            "overwrites": [
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\u26a0serious-talk",
+            "type": "text",
+            "position": 10,
+            "category_id": 1282026562740289607,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1283499484319449141,
+                    "type": "role",
+                    "name": "\u300cBooster\u300d",
+                    "allow": 1024,
+                    "deny": 0
+                },
+                {
+                    "id": 1295852430566752390,
+                    "type": "role",
+                    "name": "\u300cLevels 5-9\u300d",
+                    "allow": 1024,
+                    "deny": 0
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\u2b50starboard",
+            "type": "text",
+            "position": 15,
+            "category_id": 1282026562740289607,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 51200
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": "React to messages with :star:, once they reach 2 stars theyll be added to this channel."
+        },
+        {
+            "name": "\ud83e\udd91Krakens Office",
+            "type": "voice",
+            "position": 8,
+            "category_id": 1294668683318394951,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1049600
+                },
+                {
+                    "id": 1294671831537680488,
+                    "type": "role",
+                    "name": "Minecraft Staff",
+                    "allow": 1049600,
+                    "deny": 0
+                },
+                {
+                    "id": 1294671778769141760,
+                    "type": "role",
+                    "name": "Discord Staff",
+                    "allow": 1049600,
+                    "deny": 0
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udde3General",
+            "type": "voice",
+            "position": 0,
+            "category_id": 1282026562740289608,
+            "overwrites": [
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "logs",
+            "type": "text",
+            "position": 32,
+            "category_id": 1294668683318394951,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1294671778769141760,
+                    "type": "role",
+                    "name": "Discord Staff",
+                    "allow": 1024,
+                    "deny": 8192
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udce3mc-announcements",
+            "type": "text",
+            "position": 22,
+            "category_id": 1283770307785658433,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 1024,
+                    "deny": 2048
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "high-ranking-mc-staff",
+            "type": "text",
+            "position": 40,
+            "category_id": 1294668683318394951,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1295064547446755358,
+                    "type": "role",
+                    "name": "Minecraft Admin",
+                    "allow": 1024,
+                    "deny": 0
+                },
+                {
+                    "id": 1295064288305614973,
+                    "type": "role",
+                    "name": "Minecraft Manager",
+                    "allow": 1024,
+                    "deny": 0
+                },
+                {
+                    "id": 1295064344400367719,
+                    "type": "role",
+                    "name": "Minecraft Sr Admin",
+                    "allow": 1024,
+                    "deny": 0
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83e\udd1dDuo",
+            "type": "voice",
+            "position": 5,
+            "category_id": 1282026562740289608,
+            "overwrites": [
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "The Big 3 VC",
+            "type": "voice",
+            "position": 9,
+            "category_id": 1294668683318394951,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1049600
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "krakens-test-chambers",
+            "type": "text",
+            "position": 34,
+            "category_id": 1294668683318394951,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83c\udf10global-chat",
+            "type": "text",
+            "position": 17,
+            "category_id": 1282026562740289607,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 49152
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "staff-handbook-updates",
+            "type": "text",
+            "position": 29,
+            "category_id": 1294668683318394951,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1049600
+                },
+                {
+                    "id": 1294671831537680488,
+                    "type": "role",
+                    "name": "Minecraft Staff",
+                    "allow": 1049600,
+                    "deny": 0
+                },
+                {
+                    "id": 1294671778769141760,
+                    "type": "role",
+                    "name": "Discord Staff",
+                    "allow": 1049600,
+                    "deny": 0
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83c\udf93mod-promotions",
+            "type": "text",
+            "position": 27,
+            "category_id": 1294668683318394951,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 1024,
+                    "deny": 1050624
+                },
+                {
+                    "id": 1294671831537680488,
+                    "type": "role",
+                    "name": "Minecraft Staff",
+                    "allow": 1049600,
+                    "deny": 0
+                },
+                {
+                    "id": 1294671778769141760,
+                    "type": "role",
+                    "name": "Discord Staff",
+                    "allow": 1049600,
+                    "deny": 0
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83e\udd1dpartners",
+            "type": "text",
+            "position": 5,
+            "category_id": 1283767109205233786,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 1024,
+                    "deny": 2048
+                },
+                {
+                    "id": 1296453751447621704,
+                    "type": "role",
+                    "name": "Partner",
+                    "allow": 2048,
+                    "deny": 0
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udcacstaff-chat",
+            "type": "text",
+            "position": 31,
+            "category_id": 1294668683318394951,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1049600
+                },
+                {
+                    "id": 1294671831537680488,
+                    "type": "role",
+                    "name": "Minecraft Staff",
+                    "allow": 1049600,
+                    "deny": 0
+                },
+                {
+                    "id": 1294671778769141760,
+                    "type": "role",
+                    "name": "Discord Staff",
+                    "allow": 1049600,
+                    "deny": 0
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udc8esupporter-chat",
+            "type": "text",
+            "position": 11,
+            "category_id": 1282026562740289607,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1283499484319449141,
+                    "type": "role",
+                    "name": "\u300cBooster\u300d",
+                    "allow": 1024,
+                    "deny": 0
+                },
+                {
+                    "id": 1311680618223898654,
+                    "type": "role",
+                    "name": "\u300cSquidSquad\u300d",
+                    "allow": 1024,
+                    "deny": 0
+                },
+                {
+                    "id": 1294671778769141760,
+                    "type": "role",
+                    "name": "Discord Staff",
+                    "allow": 1024,
+                    "deny": 0
+                },
+                {
+                    "id": 1311680465094053960,
+                    "type": "role",
+                    "name": "SquidSquad Tier 3",
+                    "allow": 1024,
+                    "deny": 0
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udcf7media",
+            "type": "text",
+            "position": 12,
+            "category_id": 1282026562740289607,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 49152,
+                    "deny": 0
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 10,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udd25self-promo",
+            "type": "text",
+            "position": 13,
+            "category_id": 1282026562740289607,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 1024,
+                    "deny": 51200
+                },
+                {
+                    "id": 1295852596732493924,
+                    "type": "role",
+                    "name": "\u300cLevels 10-14\u300d",
+                    "allow": 2048,
+                    "deny": 0
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 21600,
+            "nsfw": false,
+            "topic": "Advertise here! Requires level 10+, upon advertising you cannot advertise for 1 week or your perms to talk here will be removed"
+        },
+        {
+            "name": "modlogs",
+            "type": "text",
+            "position": 35,
+            "category_id": 1294668683318394951,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1294671778769141760,
+                    "type": "role",
+                    "name": "Discord Staff",
+                    "allow": 1024,
+                    "deny": 10240
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83c\udfb0gambling-economy",
+            "type": "text",
+            "position": 19,
+            "category_id": 1367887073499156530,
+            "overwrites": [
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83e\udd16bot-commands",
+            "type": "text",
+            "position": 18,
+            "category_id": 1367887073499156530,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 49152,
+                    "deny": 0
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udcddrules",
+            "type": "text",
+            "position": 1,
+            "category_id": 1283767109205233786,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 1024,
+                    "deny": 2048
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udde3General 2",
+            "type": "voice",
+            "position": 1,
+            "category_id": 1282026562740289608,
+            "overwrites": [
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udd90Ace",
+            "type": "voice",
+            "position": 4,
+            "category_id": 1282026562740289608,
+            "overwrites": [
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "mc-console",
+            "type": "text",
+            "position": 33,
+            "category_id": 1294668683318394951,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1295064547446755358,
+                    "type": "role",
+                    "name": "Minecraft Admin",
+                    "allow": 1024,
+                    "deny": 2048
+                },
+                {
+                    "id": 1295064288305614973,
+                    "type": "role",
+                    "name": "Minecraft Manager",
+                    "allow": 1024,
+                    "deny": 0
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": "TPS: 20.0 | Mem: 2.0GB used/0.4GB free/5.8GB max | 1.21.3-R0.1-SNAPSHOT"
+        },
+        {
+            "name": "\u2696staff-introductions",
+            "type": "text",
+            "position": 8,
+            "category_id": 1283767109205233786,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 1024,
+                    "deny": 2048
+                },
+                {
+                    "id": 1294671831537680488,
+                    "type": "role",
+                    "name": "Minecraft Staff",
+                    "allow": 2048,
+                    "deny": 0
+                },
+                {
+                    "id": 1294671778769141760,
+                    "type": "role",
+                    "name": "Discord Staff",
+                    "allow": 3072,
+                    "deny": 0
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83c\udfb5Music",
+            "type": "voice",
+            "position": 6,
+            "category_id": 1282026562740289608,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 1048576,
+                    "deny": 4398048608768
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udc4bintroductions",
+            "type": "text",
+            "position": 14,
+            "category_id": 1282026562740289607,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 49152
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 1800,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "staff-handbook",
+            "type": "text",
+            "position": 28,
+            "category_id": 1294668683318394951,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1294671778769141760,
+                    "type": "role",
+                    "name": "Discord Staff",
+                    "allow": 1024,
+                    "deny": 0
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "planning-chat-cause-breezy-wanted-it-idk",
+            "type": "text",
+            "position": 37,
+            "category_id": 1294668683318394951,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1049600
+                },
+                {
+                    "id": 1294671831537680488,
+                    "type": "role",
+                    "name": "Minecraft Staff",
+                    "allow": 1049600,
+                    "deny": 0
+                },
+                {
+                    "id": 1294671778769141760,
+                    "type": "role",
+                    "name": "Discord Staff",
+                    "allow": 1049600,
+                    "deny": 0
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83c\udfb5music-commands",
+            "type": "text",
+            "position": 21,
+            "category_id": 1367887073499156530,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 49152,
+                    "deny": 0
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": "A place for Music discussion and recommendation"
+        },
+        {
+            "name": "\ud83d\udcfaStage",
+            "type": "stage_voice",
+            "position": 7,
+            "category_id": 1282026562740289608,
+            "overwrites": [
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1317838198432600104,
+                    "type": "role",
+                    "name": "gulag person",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udcacgeneral",
+            "type": "text",
+            "position": 9,
+            "category_id": 1282026562740289607,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 49152
+                },
+                {
+                    "id": 1283499484319449141,
+                    "type": "role",
+                    "name": "\u300cBooster\u300d",
+                    "allow": 49152,
+                    "deny": 0
+                },
+                {
+                    "id": 1295852430566752390,
+                    "type": "role",
+                    "name": "\u300cLevels 5-9\u300d",
+                    "allow": 49152,
+                    "deny": 0
+                },
+                {
+                    "id": 1295852195585069137,
+                    "type": "role",
+                    "name": "\u300cLevels 0-4\u300d",
+                    "allow": 0,
+                    "deny": 0
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                },
+                {
+                    "id": 1311680276555890690,
+                    "type": "role",
+                    "name": "SquidSquad Tier 1",
+                    "allow": 49152,
+                    "deny": 0
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83c\udf89giveaways",
+            "type": "text",
+            "position": 6,
+            "category_id": 1283767109205233786,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 3072
+                },
+                {
+                    "id": 1295852430566752390,
+                    "type": "role",
+                    "name": "\u300cLevels 5-9\u300d",
+                    "allow": 1024,
+                    "deny": 0
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udce3announcements",
+            "type": "text",
+            "position": 2,
+            "category_id": 1283767109205233786,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 274877907968,
+                    "deny": 2048
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "\ud83d\udcd6mc-server-info",
+            "type": "text",
+            "position": 23,
+            "category_id": 1283770307785658433,
+            "overwrites": [
+                {
+                    "id": 1282026562740289606,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 1024,
+                    "deny": 2048
+                },
+                {
+                    "id": 1296917049435492432,
+                    "type": "role",
+                    "name": "Unverified",
+                    "allow": 0,
+                    "deny": 1024
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        }
+    ],
+    "roles": [
+        {
+            "name": "Verifier",
+            "color": 0,
+            "permissions": 1099780451582,
+            "hoist": false,
+            "mentionable": false,
+            "position": 111
+        },
+        {
+            "name": "carl-bot",
+            "color": 0,
+            "permissions": 2088234238,
+            "hoist": false,
+            "mentionable": false,
+            "position": 110
+        },
+        {
+            "name": "\u300cServers\u300d",
+            "color": 0,
+            "permissions": 8,
+            "hoist": true,
+            "mentionable": false,
+            "position": 109
+        },
+        {
+            "name": "red82",
+            "color": 16711680,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 108
+        },
+        {
+            "name": "\u300cOwner\u300d",
+            "color": 10181046,
+            "permissions": 0,
+            "hoist": true,
+            "mentionable": false,
+            "position": 107
+        },
+        {
+            "name": "Cephalobot",
+            "color": 0,
+            "permissions": 405839932671,
+            "hoist": false,
+            "mentionable": false,
+            "position": 106
+        },
+        {
+            "name": "\u300cCo-Owner\u300d",
+            "color": 7419530,
+            "permissions": 8,
+            "hoist": true,
+            "mentionable": false,
+            "position": 105
+        },
+        {
+            "name": "really silly",
+            "color": 12295167,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 104
+        },
+        {
+            "name": "Test",
+            "color": 15158332,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 103
+        },
+        {
+            "name": "\u300cDev\u300d",
+            "color": 0,
+            "permissions": 0,
+            "hoist": true,
+            "mentionable": false,
+            "position": 102
+        },
+        {
+            "name": "\u300cManager\u300d",
+            "color": 0,
+            "permissions": 0,
+            "hoist": true,
+            "mentionable": false,
+            "position": 101
+        },
+        {
+            "name": "Discord Manager",
+            "color": 0,
+            "permissions": 8,
+            "hoist": false,
+            "mentionable": false,
+            "position": 100
+        },
+        {
+            "name": "Minecraft Manager",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 99
+        },
+        {
+            "name": "\u300cSr Admin\u300d",
+            "color": 0,
+            "permissions": 0,
+            "hoist": true,
+            "mentionable": false,
+            "position": 98
+        },
+        {
+            "name": "Discord Sr Admin",
+            "color": 0,
+            "permissions": 1116721064206,
+            "hoist": false,
+            "mentionable": false,
+            "position": 97
+        },
+        {
+            "name": "Minecraft Sr Admin",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 96
+        },
+        {
+            "name": "\u300cAdmin\u300d",
+            "color": 0,
+            "permissions": 0,
+            "hoist": true,
+            "mentionable": false,
+            "position": 95
+        },
+        {
+            "name": "Discord Admin",
+            "color": 0,
+            "permissions": 370656109865348,
+            "hoist": false,
+            "mentionable": false,
+            "position": 94
+        },
+        {
+            "name": "Minecraft Admin",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 93
+        },
+        {
+            "name": "\u300cMod\u300d",
+            "color": 0,
+            "permissions": 0,
+            "hoist": true,
+            "mentionable": false,
+            "position": 92
+        },
+        {
+            "name": "Discord Mod",
+            "color": 0,
+            "permissions": 1116855083268,
+            "hoist": false,
+            "mentionable": false,
+            "position": 91
+        },
+        {
+            "name": "Minecraft Mod",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 90
+        },
+        {
+            "name": "\u300cJr Mod\u300d",
+            "color": 0,
+            "permissions": 0,
+            "hoist": true,
+            "mentionable": false,
+            "position": 89
+        },
+        {
+            "name": "Discord Jr Mod",
+            "color": 0,
+            "permissions": 1099645853696,
+            "hoist": false,
+            "mentionable": false,
+            "position": 88
+        },
+        {
+            "name": "Minecraft Jr Mod",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 87
+        },
+        {
+            "name": "Discord Staff",
+            "color": 0,
+            "permissions": 1073741824,
+            "hoist": false,
+            "mentionable": false,
+            "position": 86
+        },
+        {
+            "name": "Minecraft Staff",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 85
+        },
+        {
+            "name": "gulag person",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 84
+        },
+        {
+            "name": "Kanye West Enthusiast",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 83
+        },
+        {
+            "name": "SquidSquad Tier 4",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 82
+        },
+        {
+            "name": "SquidSquad Tier 3",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 81
+        },
+        {
+            "name": "SquidSquad Tier 2",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 80
+        },
+        {
+            "name": "SquidSquad Tier 1",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 79
+        },
+        {
+            "name": "\u300cSquidSquad\u300d",
+            "color": 0,
+            "permissions": 49152,
+            "hoist": true,
+            "mentionable": false,
+            "position": 78
+        },
+        {
+            "name": "Elden Ring Leveling",
+            "color": 5570560,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 77
+        },
+        {
+            "name": "Avery duck",
+            "color": 9559460,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 76
+        },
+        {
+            "name": "Coolest Idiot",
+            "color": 13542141,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 75
+        },
+        {
+            "name": "Dog",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 74
+        },
+        {
+            "name": "Meow :3",
+            "color": 15939183,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 73
+        },
+        {
+            "name": "Red",
+            "color": 16711680,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 72
+        },
+        {
+            "name": "Green",
+            "color": 2067276,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 71
+        },
+        {
+            "name": "Blue",
+            "color": 14847,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 70
+        },
+        {
+            "name": "Yellow",
+            "color": 15844367,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 69
+        },
+        {
+            "name": "Purple",
+            "color": 10181046,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 68
+        },
+        {
+            "name": "\u300cBooster\u300d",
+            "color": 16023551,
+            "permissions": 2239677372681793,
+            "hoist": true,
+            "mentionable": false,
+            "position": 67
+        },
+        {
+            "name": "DISBOARD.org",
+            "color": 0,
+            "permissions": 19473,
+            "hoist": false,
+            "mentionable": false,
+            "position": 66
+        },
+        {
+            "name": "queen of cephalo (OFFICIAL)",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 65
+        },
+        {
+            "name": "super secret role",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 64
+        },
+        {
+            "name": "\u300cLevels 40+\u300d",
+            "color": 0,
+            "permissions": 0,
+            "hoist": true,
+            "mentionable": false,
+            "position": 63
+        },
+        {
+            "name": "\u300cLevels 30-39\u300d",
+            "color": 0,
+            "permissions": 0,
+            "hoist": true,
+            "mentionable": false,
+            "position": 62
+        },
+        {
+            "name": "\u300cLevels 20-29\u300d",
+            "color": 0,
+            "permissions": 0,
+            "hoist": true,
+            "mentionable": false,
+            "position": 61
+        },
+        {
+            "name": "\u300cLevels 15-19\u300d",
+            "color": 0,
+            "permissions": 0,
+            "hoist": true,
+            "mentionable": false,
+            "position": 60
+        },
+        {
+            "name": "\u300cLevels 10-14\u300d",
+            "color": 0,
+            "permissions": 0,
+            "hoist": true,
+            "mentionable": false,
+            "position": 59
+        },
+        {
+            "name": "\u300cLevels 5-9\u300d",
+            "color": 0,
+            "permissions": 0,
+            "hoist": true,
+            "mentionable": false,
+            "position": 58
+        },
+        {
+            "name": "\u300cLevels 0-4\u300d",
+            "color": 0,
+            "permissions": 0,
+            "hoist": true,
+            "mentionable": false,
+            "position": 57
+        },
+        {
+            "name": "Partner",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 56
+        },
+        {
+            "name": "Announcements",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 55
+        },
+        {
+            "name": "Giveaways",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 54
+        },
+        {
+            "name": "server revive ping (SCP SL)",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 53
+        },
+        {
+            "name": "SCP Secret Laboratory",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 52
+        },
+        {
+            "name": "SCP Secret Laboratory Updates",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 51
+        },
+        {
+            "name": "Minecraft",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 50
+        },
+        {
+            "name": "Minecraft Updates",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 49
+        },
+        {
+            "name": "Bump Ping",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 48
+        },
+        {
+            "name": "Game Night",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 47
+        },
+        {
+            "name": "Bots",
+            "color": 0,
+            "permissions": 8,
+            "hoist": true,
+            "mentionable": false,
+            "position": 46
+        },
+        {
+            "name": "I am NOT poor",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 45
+        },
+        {
+            "name": "'I \u2764\ufe0f Cephalo' T-Shirt\ud83d\udc55",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 44
+        },
+        {
+            "name": "Casino Membership",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 43
+        },
+        {
+            "name": "'Mommys Little Gambler' Cap\ud83e\udde2",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 42
+        },
+        {
+            "name": "I am poor",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 41
+        },
+        {
+            "name": "Fibo",
+            "color": 0,
+            "permissions": 2416143600,
+            "hoist": false,
+            "mentionable": false,
+            "position": 40
+        },
+        {
+            "name": "silly",
+            "color": 11342935,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 39
+        },
+        {
+            "name": "Unverified",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 38
+        },
+        {
+            "name": "alt account",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 37
+        },
+        {
+            "name": "QOTD Bot",
+            "color": 0,
+            "permissions": 326418033672,
+            "hoist": false,
+            "mentionable": false,
+            "position": 36
+        },
+        {
+            "name": "GiveawayBot",
+            "color": 0,
+            "permissions": 347208,
+            "hoist": false,
+            "mentionable": false,
+            "position": 35
+        },
+        {
+            "name": "Roblox",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 34
+        },
+        {
+            "name": "Rainbow Six Siege",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 33
+        },
+        {
+            "name": "Lethal Company",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 32
+        },
+        {
+            "name": "Fortnite",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 31
+        },
+        {
+            "name": "Adult",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 30
+        },
+        {
+            "name": "Minor",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 29
+        },
+        {
+            "name": "23+",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 28
+        },
+        {
+            "name": "19-22",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 27
+        },
+        {
+            "name": "17-18",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 26
+        },
+        {
+            "name": "15-16",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 25
+        },
+        {
+            "name": "13-14",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 24
+        },
+        {
+            "name": "Asia",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 23
+        },
+        {
+            "name": "Europe",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 22
+        },
+        {
+            "name": "Americas",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 21
+        },
+        {
+            "name": "Oceania",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 20
+        },
+        {
+            "name": "Africa",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 19
+        },
+        {
+            "name": "She/her",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 18
+        },
+        {
+            "name": "He/him",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 17
+        },
+        {
+            "name": "They/them",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 16
+        },
+        {
+            "name": "Other Pronouns/ask",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 15
+        },
+        {
+            "name": ".fmbot",
+            "color": 0,
+            "permissions": 275415092288,
+            "hoist": false,
+            "mentionable": false,
+            "position": 14
+        },
+        {
+            "name": "Truth or Dare",
+            "color": 0,
+            "permissions": 19456,
+            "hoist": false,
+            "mentionable": false,
+            "position": 13
+        },
+        {
+            "name": "no image perms in general!",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 12
+        },
+        {
+            "name": "no image perms general",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 11
+        },
+        {
+            "name": "unc",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 10
+        },
+        {
+            "name": "new role",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 9
+        },
+        {
+            "name": "CephaloSCP [EU]",
+            "color": 0,
+            "permissions": 8,
+            "hoist": false,
+            "mentionable": false,
+            "position": 8
+        },
+        {
+            "name": "Confessions",
+            "color": 0,
+            "permissions": 397284863048,
+            "hoist": false,
+            "mentionable": false,
+            "position": 6
+        },
+        {
+            "name": "inactive",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 5
+        },
+        {
+            "name": "CephaloBot",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 4
+        },
+        {
+            "name": "dead chat ping",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 3
+        },
+        {
+            "name": "new role",
+            "color": 0,
+            "permissions": 0,
+            "hoist": false,
+            "mentionable": false,
+            "position": 2
+        },
+        {
+            "name": "Tickets v2",
+            "color": 0,
+            "permissions": 395942816984,
+            "hoist": false,
+            "mentionable": false,
+            "position": 1
+        },
+        {
+            "name": "Majesty Translator",
+            "color": 0,
+            "permissions": 518416362560,
+            "hoist": false,
+            "mentionable": false,
+            "position": 1
+        }
+    ],
+    "backup_date": "2025-05-21 22:01:24.050427"
+}

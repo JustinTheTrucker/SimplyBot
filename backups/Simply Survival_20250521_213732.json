@@ -1,0 +1,120 @@
+{
+    "name": "Simply Survival",
+    "icon_url": null,
+    "created_at": "2025-05-18 01:12:35.859000+00:00",
+    "categories": [
+        {
+            "name": "Text Channels",
+            "position": 0,
+            "overwrites": [],
+            "id": 1373468280420958269
+        },
+        {
+            "name": "Voice Channels",
+            "position": 0,
+            "overwrites": [],
+            "id": 1373468280420958270
+        },
+        {
+            "name": "Staff",
+            "position": 1,
+            "overwrites": [
+                {
+                    "id": 1373468280420958268,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1049600
+                }
+            ],
+            "id": 1373468313736319118
+        }
+    ],
+    "channels": [
+        {
+            "name": "general",
+            "type": "text",
+            "position": 0,
+            "category_id": 1373468280420958269,
+            "overwrites": [],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "General",
+            "type": "voice",
+            "position": 0,
+            "category_id": 1373468280420958270,
+            "overwrites": [],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "chat",
+            "type": "text",
+            "position": 1,
+            "category_id": 1373468313736319118,
+            "overwrites": [
+                {
+                    "id": 1373468280420958268,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1049600
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "ideas",
+            "type": "text",
+            "position": 2,
+            "category_id": 1373468313736319118,
+            "overwrites": [
+                {
+                    "id": 1373468280420958268,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1049600
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        },
+        {
+            "name": "to-do-list",
+            "type": "text",
+            "position": 3,
+            "category_id": 1373468313736319118,
+            "overwrites": [
+                {
+                    "id": 1373468280420958268,
+                    "type": "role",
+                    "name": "@everyone",
+                    "allow": 0,
+                    "deny": 1049600
+                }
+            ],
+            "slowmode_delay": 0,
+            "nsfw": false,
+            "topic": null
+        }
+    ],
+    "roles": [
+        {
+            "name": "bots",
+            "color": 0,
+            "permissions": 8,
+            "hoist": false,
+            "mentionable": false,
+            "position": 1
+        }
+    ],
+    "backup_date": "2025-05-21 21:37:31.815309"
+}

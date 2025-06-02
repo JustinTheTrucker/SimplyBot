@@ -1,0 +1,108 @@
+{
+    "suggestions": {
+        "9": {
+            "id": 9,
+            "author_id": 267305778619088896,
+            "author_name": "justinthetrucker",
+            "content": "this is a test idea",
+            "anonymous": true,
+            "timestamp": "2025-05-22T01:18:33.226879",
+            "status": "pending",
+            "guild_id": 1374869078451163309,
+            "thread_id": 1374919331410087986,
+            "message_id": 1374919331410087986
+        },
+        "10": {
+            "id": 10,
+            "author_id": 1157734320153313351,
+            "author_name": "justa_person8888",
+            "content": "Revive command: can be ran once every 5 hours and pings chat revive. Could or could not have a level requirement. Message format:\nMe (for example): !revive\nCephalo: <@(my user id)> summons <@&(chat revive role id)> to <#(channel id)>\nWe already have a revive ping but it's barely ever used because not even mods can ping it. I think this would fix that problem.",
+            "anonymous": false,
+            "timestamp": "2025-05-22T01:20:19.325747",
+            "status": "pending",
+            "guild_id": 1374869078451163309,
+            "thread_id": 1374919776396120125,
+            "message_id": 1374919776396120125
+        },
+        "11": {
+            "id": 11,
+            "author_id": 1157734320153313351,
+            "author_name": "justa_person8888",
+            "content": "number one, add /suggest as a working slash command. Second, in the command add the ability for an attachment.",
+            "anonymous": false,
+            "timestamp": "2025-05-22T20:47:45.133699",
+            "status": "pending",
+            "guild_id": 1374869078451163309,
+            "thread_id": 1375213569812987996,
+            "message_id": 1375213569812987996
+        },
+        "12": {
+            "id": 12,
+            "author_id": 1157734320153313351,
+            "author_name": "justa_person8888",
+            "content": "fix \"User Baned\" message when using !punish",
+            "anonymous": false,
+            "timestamp": "2025-05-24T18:49:29.275119",
+            "status": "pending",
+            "guild_id": 1374869078451163309,
+            "thread_id": 1375908583467909231,
+            "message_id": 1375908583467909231
+        },
+        "13": {
+            "id": 13,
+            "author_id": 1157734320153313351,
+            "author_name": "justa_person8888",
+            "content": "Smart slowmode: when general gets too active, a slowmode activates and increases as needed. When general isn't active there's no slowmode. I think this is a better solution then disabling image perms",
+            "anonymous": false,
+            "timestamp": "2025-05-24T18:50:47.892303",
+            "status": "pending",
+            "guild_id": 1374869078451163309,
+            "thread_id": 1375908913085546516,
+            "message_id": 1375908913085546516
+        }
+    },
+    "votes": {
+        "1": {
+            "upvotes": [],
+            "downvotes": []
+        },
+        "2": {
+            "upvotes": [],
+            "downvotes": [
+                "267305778619088896"
+            ]
+        },
+        "3": {
+            "upvotes": [
+                "267305778619088896",
+                "1157734320153313351"
+            ],
+            "downvotes": []
+        },
+        "4": {
+            "upvotes": [
+                "1157734320153313351"
+            ],
+            "downvotes": []
+        },
+        "5": {
+            "upvotes": [],
+            "downvotes": []
+        },
+        "6": {
+            "upvotes": [],
+            "downvotes": []
+        }
+    },
+    "settings": {
+        "1374869078451163309": {
+            "suggestions_channel": 1375908084265910442,
+            "review_channel": null,
+            "anonymous_allowed": true,
+            "voting_enabled": true,
+            "auto_reactions": true,
+            "use_threads": true,
+            "use_forum": false
+        }
+    }
+}

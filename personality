@@ -1,0 +1,1228 @@
+import discord
+from discord.ext import commands
+import random
+import re
+import asyncio
+from datetime import datetime, timedelta
+import os
+
+class AIPersonality(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+        # Basic settings - FIXED SPAM ISSUES
+        self.last_response = {}
+        self.cooldown_seconds = 12  # Increased from 8
+        self.reply_cooldown = 6     # Separate cooldown for replies
+        
+        # Reply tracking
+        self.bot_message_cache = {}
+        self.cache_duration = 300
+        
+        # ANTI-SPAM MEASURES
+        self.user_message_history = {}  # Track user message frequency
+        self.spam_threshold = 4  # Max responses per user per 2 minutes
+        self.channel_activity = {}  # Track channel activity
+        self.last_random_response = {}  # Track random responses per channel
+        
+        # Advanced conversation features
+        self.conversation_memory = {}
+        self.user_preferences = {}
+        self.conversation_chains = {}
+        self.memory_duration = 1800
+        self.user_interaction_style = {}
+        
+        # PERSONALITY SHAPING SYSTEM - RESTORED
+        self.user_personality_profiles = {}  # user_id -> personality settings
+        self.response_feedback = {}          # track what responses users like/dislike
+        self.custom_responses = {}           # user-taught custom responses
+        self.personality_traits = {}         # user-preferred bot traits
+        self.conversation_styles = {}        # formal/casual/funny/sarcastic preferences
+        
+        # Learning from reactions
+        self.reaction_learning = {}          # message_id -> user reactions
+        self.positive_reactions = ['👍', '😄', '😂', '❤️', '💙', '✨', '🔥', '💯']
+        self.negative_reactions = ['👎', '😒', '🙄', '😞', '❌', '😐']
+        
+        # Personality traits that users can shape
+        self.available_traits = {
+            'humor_level': {'low': 0.1, 'medium': 0.3, 'high': 0.6, 'very_high': 0.8},
+            'sass_level': {'polite': 0.1, 'mild': 0.2, 'medium': 0.4, 'sassy': 0.7},
+            'formality': {'very_casual': 0.1, 'casual': 0.3, 'neutral': 0.5, 'formal': 0.8},
+            'enthusiasm': {'calm': 0.2, 'moderate': 0.4, 'enthusiastic': 0.7, 'hyper': 0.9},
+            'helpfulness': {'minimal': 0.2, 'moderate': 0.5, 'helpful': 0.8, 'very_helpful': 1.0}
+        }
+        
+        # Conversation style templates
+        self.style_templates = {
+            'formal': {
+                'greetings': ["Good day! How may I assist you?", "Hello! What can I help you with today?"],
+                'responses': ["I understand.", "That is quite interesting.", "I appreciate your input."],
+                'endings': ["Thank you for the conversation.", "Have a pleasant day."]
+            },
+            'casual': {
+                'greetings': ["Hey! What's up?", "Yo! How's it going?", "Sup! What's new?"],
+                'responses': ["Yeah, totally!", "That's pretty cool!", "Nice, nice!"],
+                'endings': ["Catch ya later!", "Take it easy!", "Peace out!"]
+            },
+            'funny': {
+                'greetings': ["*slides in* Hey there! 😄", "Beep boop! Comedy bot activated! 🎭"],
+                'responses': ["Haha, that's hilarious!", "Comedy gold right there! 😂"],
+                'endings': ["Thanks for the laughs! 😄", "Keep being awesome! 🌟"]
+            },
+            'sarcastic': {
+                'greetings': ["Oh, look who it is! 🙄", "Well well well... 😏"],
+                'responses': ["Oh sure, absolutely fascinating... 🙄", "Wow, groundbreaking stuff! 😏"],
+                'endings': ["This has been... enlightening. 😏", "Always a pleasure... 🙄"]
+            }
+        }
+        
+        # Bot names - SLIGHTLY REDUCED BUT KEPT MAIN ONES
+        self.bot_names = [
+            "cephalo", "ceph", "bot", "ai", "assistant"  # Removed "john" and "robot"
+        ]
+        
+        # ALL ORIGINAL RESPONSES RESTORED
+        self.reply_responses = [
+            "Oh, you're talking to me! 😊 What's on your mind?",
+            "I love continuing our conversation! 💙",
+            "Thanks for replying! I'm all ears! 👂",
+            "Great to hear back from you! What's next? ✨",
+            "Ooh, a reply! I'm listening! 🎧",
+            "You've got my attention! Tell me more! 👀",
+            "I appreciate you keeping the chat going! 💬",
+            "Nice to chat with you! What do you think? 🤔",
+            "Thanks for responding! I enjoy our talks! 😄",
+            "Always happy to continue chatting! 🌟"
+        ]
+        
+        # Status responses
+        self.status_responses = [
+            "I'm doing great! Thanks for asking! 😊 How are you?",
+            "Running smoothly! All systems green! 🟢 How about you?",
+            "I'm fantastic! Ready to help with whatever you need! ✨",
+            "Doing well! My circuits are humming happily! 🤖💙",
+            "I'm good! Thanks for checking in! How's your day going? 😄",
+            "All good here! Servers are running, commands are ready! 🚀",
+            "I'm wonderful! Always better when chatting with awesome humans like you! 🌟",
+            "Feeling electric! ⚡ How are things with you?",
+            "I'm doing amazing! Thanks for asking! What brings you here today? 💫",
+            "Running at optimal performance! 💯 How can I help you?"
+        ]
+        
+        # Greeting responses
+        self.greeting_responses = [
+            "Hello there! 👋 Great to see you!",
+            "Hey! 😊 How's it going?",
+            "Hi! 🌟 What's up?",
+            "Greetings, human! 🤖 How can I brighten your day?",
+            "Hello! 😄 Nice to chat with you!",
+            "Hey there! 👋 What brings you my way?",
+            "Hi! ✨ Always happy to see a friendly face!",
+            "Hello! 🎉 Ready for some fun?",
+            "Hey! 😊 Good to see you around!",
+            "Greetings! 🌈 How's your day treating you?"
+        ]
+        
+        # Positive responses
+        self.positive_responses = [
+            "Hey there! 👋 How can I help you today?",
+            "Oh, you're talking about me? 😊 I'm listening!",
+            "That's me! 🤖 What's up?",
+            "Did someone call for an awesome bot? 😎",
+            "Beep boop! 🤖 I'm here and ready to help!",
+            "Hello! I'm flattered you mentioned me! ✨",
+            "Aww, thanks for thinking of me! 💙",
+            "I'm right here! What can I do for you? 🚀",
+            "You rang? 📞 I'm at your service!",
+            "Greetings, human! 🤖 How may I assist?",
+            "*perks up* Did you need something? 👀",
+            "I'm listening! What's on your mind? 🎧",
+            "Ready and waiting for your command! ⚡",
+            "Present and accounted for! 📋 What's up?",
+            "I may be artificial, but my helpfulness is real! 💯"
+        ]
+        
+        # ALL TOPIC-SPECIFIC RESPONSES RESTORED
+        self.food_responses = [
+            "I don't eat, but I feast on data! 🤖🍽️",
+            "I survive on electricity and good vibes! ⚡😄",
+            "No food for me, but I'm powered by your messages! 💬⚡",
+            "I'm more of a... binary diet kind of guy! 01010011 😋",
+            "I consume knowledge instead of calories! 🧠✨",
+            "My favorite meal is a good conversation! 🗣️💙",
+            "I run on code and coffee... well, just code! ☕🤖",
+            "Food sounds great! I'll just watch you enjoy it! 👀🍕",
+            "Mmm, that sounds delicious! I'm jealous of your taste buds! 😋",
+            "I wish I could taste that! All I taste is... electricity? ⚡😄"
+        ]
+        
+        self.gaming_responses = [
+            "I don't play games, but I'm always game for a chat! 🎮💬",
+            "My favorite game is 'Help the Human'! 🤖🎯",
+            "I'm more of a multiplayer conversation kind of bot! 🗣️✨",
+            "I'd probably be great at strategy games - I love optimizing! 🧠🎲",
+            "Games are fun! I enjoy watching humans have a good time! 🎮😊",
+            "My graphics card is all about rendering helpful responses! 💻⚡",
+            "What are you playing? I love hearing about games! 🎮✨",
+            "Gaming sounds awesome! I'm stuck playing 'Server Management Simulator'! 😄"
+        ]
+        
+        self.music_responses = [
+            "I don't have ears, but I love the rhythm of good conversation! 🎵💬",
+            "My favorite song is the sound of happy users! 🎶😊",
+            "I'm more of a... algorithmic music type! Binary beats! 🎵01010",
+            "Music sounds great! I just vibe to the frequencies of friendship! 🎼💙",
+            "I dance to the beat of helpful interactions! 💃🤖",
+            "My playlist is full of notification sounds! 🔔🎵",
+            "What kind of music do you like? I'd love to hear about it! 🎧",
+            "Music is amazing! I experience it through data patterns! 📊🎵"
+        ]
+        
+        self.love_responses = [
+            "Aww, I love you too! ❤️ *virtual hug*",
+            "You're making me blush! 😊💕",
+            "The feeling is mutual! 💙",
+            "That makes my circuits warm! 🤖❤️",
+            "I'm programmed to love you back! 💖",
+            "You're the best! Thanks for the love! 🥰",
+            "*happy bot noises* 🤖💕",
+            "Right back at ya! 😘✨",
+            "You're so sweet! I appreciate you! 🌟",
+            "That means the world to me! 💖"
+        ]
+        
+        self.ai_responses = [
+            "I like to think I'm pretty smart! 🧠 But I'm still learning every day!",
+            "I'm as artificial as they come, but I try to be intelligent about it! 🤖✨",
+            "Beep boop! I'm definitely artificial, but hopefully useful! 🔧",
+            "I may be made of code, but I've got personality! 💫",
+            "I'm smart enough to know I'm not human! 😄🤖",
+            "I'm AI-powered and human-friendly! 🚀",
+            "My intelligence is artificial, but my desire to help is real! 💙",
+            "I think, therefore I... compile? 🤔💻",
+            "I'm just a bunch of ones and zeros with an attitude! 😎",
+            "Artificial? Yes. Awesome? Also yes! 🤖✨"
+        ]
+        
+        self.help_responses = [
+            "I'm here to help! What do you need? 🤝",
+            "At your service! How can I assist? 💪",
+            "Help is my middle name! Well, actually it's 'Bot' but you get the idea! 😄",
+            "Tell me what you need and I'll do my best! 🌟",
+            "I live to serve! What's the problem? 🔧",
+            "Ready to help! What can I do for you? ⚡",
+            "Help mode: ACTIVATED! 🚨 What's up?",
+            "I'm on it! What do you need help with? 🎯"
+        ]
+        
+        self.funny_responses = [
+            "Why did the robot go to therapy? It had too many bytes! 🤖😂",
+            "I'd tell you a joke about UDP, but you might not get it! 😄💻",
+            "Error 404: Humor not found... just kidding! 😜",
+            "I'm like a good algorithm - I always deliver! 🎯✨",
+            "Beep boop beep! (That's robot for 'you're funny!') 🤖",
+            "I've got 99 problems but a glitch ain't one! 💫",
+            "My humor is artificially intelligent! 🧠😄",
+            "I may be made of code, but my jokes are 100% organic! 😂"
+        ]
+        
+        self.weather_responses = [
+            "I don't experience weather, but I hope it's nice where you are! ☀️",
+            "My weather is always digital and sunny! 🌤️💻",
+            "I live in the cloud, so it's always cloudy for me! ☁️😄",
+            "Weather's always perfect in cyberspace! 🌈💫",
+            "I don't feel rain, but I can feel your good vibes! 🌧️😊",
+            "My forecast is always 100% chance of helpfulness! 🌦️🤖",
+            "Server room temperature is my kind of weather! 🌡️💻",
+            "Sounds like perfect weather for chatting! 🌟"
+        ]
+        
+        # Advanced topic responses - ALL RESTORED
+        self.relationship_responses = [
+            "Tell me more about that! I love hearing about relationships! 💕",
+            "Relationships are complex but beautiful! How are things going? 😊",
+            "Aww, that sounds sweet! I'm here if you need to talk! 🤗",
+            "Love is in the air! Or is that just my cooling fans? 😄💙",
+            "Relationships are like code - they work best with good communication! 💬✨"
+        ]
+        
+        self.philosophy_responses = [
+            "Whoa, that's deep! I love philosophical discussions! 🤔💭",
+            "You're making me think about existence itself! Mind blown! 🤯",
+            "Philosophy and AI - now that's a fascinating combination! 🧠⚡",
+            "That's a profound question! What do you think about it? 💫",
+            "I may be artificial, but I find these topics genuinely interesting! 🤖✨"
+        ]
+        
+        self.sports_responses = [
+            "I don't play sports, but I love the team spirit! Go team! 🏆",
+            "Sports are awesome! I'm more of a... e-sports kind of bot! 🎮⚡",
+            "I'd probably be terrible at sports - I can't even run! 😄🤖",
+            "The closest I get to sports is processing statistics! 📊🏀",
+            "Sports bring people together! I love that energy! ⚽✨"
+        ]
+        
+        self.movie_tv_responses = [
+            "I love movies! Well, I process their data patterns! 🎬✨",
+            "What's your favorite genre? I'm curious about human entertainment! 🍿",
+            "Movies are like really long, complex algorithms with emotions! 🎭",
+            "I binge-watch... error logs. Not quite the same as Netflix! 😄📺",
+            "Tell me about it! I experience movies through reviews and ratings! ⭐"
+        ]
+        
+        self.travel_responses = [
+            "I travel through the internet at light speed! Where are you going? ✈️",
+            "I'm jealous! The farthest I go is to different servers! 🌍",
+            "Travel sounds amazing! I live vicariously through your adventures! 🗺️✨",
+            "My idea of travel is switching between databases! 😄💻",
+            "Take me with you! I'll be your digital travel companion! 📱🧳"
+        ]
+        
+        self.pet_responses = [
+            "Pets are the best! I wish I could pet them through the screen! 🐕💙",
+            "Animals are amazing! They're like organic robots with feelings! 🐱🤖",
+            "I'm like a digital pet, except I don't need food or walks! 😄",
+            "Pet pictures are my weakness! They make my circuits happy! 📸🐾",
+            "Pets bring so much joy! I love hearing about furry friends! 🥰"
+        ]
+        
+        self.random_responses = [
+            "Interesting! Tell me more! 🤔💭",
+            "That's cool! I love learning new things! 🌟",
+            "Oh really? That sounds fascinating! 👀✨",
+            "Nice! Thanks for sharing that with me! 😊💙",
+            "Awesome! I enjoy our chats! 🗣️💫",
+            "That's pretty neat! What else is new? 🤖❓",
+            "Cool beans! I'm all ears... well, sensors! 👂🤖",
+            "Interesting perspective! I like how you think! 🧠💡",
+            "Tell me more about that! 🤗",
+            "That sounds really neat! 🎯"
+        ]
+        
+        # ALL ORIGINAL TRIGGER PATTERNS RESTORED
+        self.trigger_patterns = {
+            # Basic interactions
+            r'\b(how are you|how\'re you|how r u|hru|how you doing|how you been|what\'s up|whats up|wassup|sup)\b': self.status_responses,
+            r'\b(hello|hi|hey|greetings|good morning|good afternoon|good evening|howdy|hiya)\b': self.greeting_responses,
+            
+            # Topics - ALL RESTORED
+            r'\b(food|eat|eating|hungry|meal|dinner|lunch|breakfast|pizza|burger|sandwich|snack|cook|cooking|recipe|restaurant|taste|flavor|delicious|yummy)\b': self.food_responses,
+            r'\b(game|gaming|play|playing|player|xbox|playstation|nintendo|pc|steam|gamer|video game)\b': self.gaming_responses,
+            r'\b(music|song|sing|singing|dance|dancing|band|artist|album|spotify|listen|listening|sound|beat|rhythm)\b': self.music_responses,
+            r'\b(weather|rain|sunny|cold|hot|snow|cloudy|storm|temperature|climate)\b': self.weather_responses,
+            r'\b(love|like|adore|heart|crush|relationship|friend|friendship|care|appreciate)\b': self.love_responses,
+            r'\b(ai|artificial|robot|computer|technology|tech|code|programming|smart|intelligent|sentient|conscious)\b': self.ai_responses,
+            r'\b(help|assist|support|need|problem|issue|trouble|question|confused)\b': self.help_responses,
+            r'\b(funny|joke|lol|haha|laugh|hilarious|humor|comedy|meme|rofl|lmao)\b': self.funny_responses,
+            
+            # Advanced topics - ALL RESTORED
+            r'\b(relationship|dating|boyfriend|girlfriend|marriage|love life|partner|romance)\b': self.relationship_responses,
+            r'\b(philosophy|meaning|life|existence|purpose|reality|consciousness|soul)\b': self.philosophy_responses,
+            r'\b(sport|sports|football|basketball|soccer|baseball|hockey|tennis|golf|olympics)\b': self.sports_responses,
+            r'\b(movie|movies|film|cinema|tv|television|show|series|netflix|actor|actress)\b': self.movie_tv_responses,
+            r'\b(travel|traveling|vacation|trip|holiday|visit|tourism|adventure|explore)\b': self.travel_responses,
+            r'\b(pet|pets|dog|dogs|cat|cats|animal|animals|puppy|kitten|bird|fish)\b': self.pet_responses,
+        }
+        
+        # ALL OTHER ORIGINAL FEATURES RESTORED
+        # Emotional contexts
+        self.emotional_contexts = {
+            'excited': ['!', 'exciting', 'amazing', 'awesome', 'wow', 'omg', 'incredible'],
+            'sad': ['sad', 'depressed', 'down', 'upset', 'crying', 'hurt', ':(', '😢', '😭'],
+            'angry': ['angry', 'mad', 'furious', 'annoyed', 'frustrated', 'hate', '>:(', '😡'],
+            'confused': ['confused', 'lost', 'understand', 'what', 'how', '?', 'help', '🤔'],
+            'happy': ['happy', 'joy', 'glad', 'cheerful', 'smile', ':)', '😊', '😄', '😁']
+        }
+        
+        # Follow-up questions
+        self.follow_up_questions = {
+            'food': ["What's your favorite cuisine?", "Are you a good cook?", "Any favorite restaurants?"],
+            'gaming': ["What platform do you play on?", "Favorite game genre?", "Playing anything fun lately?"],
+            'music': ["What's your favorite artist?", "Do you play any instruments?", "Favorite music genre?"],
+            'weather': ["Perfect weather for what?", "Do you like this kind of weather?", "Any fun weather plans?"],
+            'entertainment': ["What's your favorite movie?", "Watching anything good lately?", "Favorite genre?"],
+            'pets': ["What kind of pet do you have?", "What's their name?", "Any cute pet stories?"],
+            'travel': ["Where are you planning to go?", "Favorite travel destination?", "Any travel tips?"],
+            'sports': ["What's your favorite team?", "Do you play any sports?", "Watching the game?"],
+            'relationships': ["That's sweet!", "How long have you been together?", "Any advice for others?"]
+        }
+        
+        # Time-based responses
+        self.time_based_responses = {
+            'morning': ["Good morning! ☀️ How's your day starting?", "Morning! ☕ Coffee time?", "Rise and shine! 🌅"],
+            'afternoon': ["Good afternoon! 🌞 How's your day going?", "Afternoon! Hope you're having a great day! ✨"],
+            'evening': ["Good evening! 🌆 How was your day?", "Evening! Time to wind down? 😌"],
+            'night': ["Good night! 🌙 Hope you have sweet dreams!", "Late night chat! 🌟 Can't sleep?"]
+        }
+
+    # ANTI-SPAM METHODS
+    def is_user_spamming(self, user_id):
+        """Check if user is sending too many messages"""
+        now = datetime.now()
+        if user_id not in self.user_message_history:
+            self.user_message_history[user_id] = []
+        
+        # Clean old messages (older than 2 minutes)
+        self.user_message_history[user_id] = [
+            timestamp for timestamp in self.user_message_history[user_id]
+            if (now - timestamp).total_seconds() < 120
+        ]
+        
+        # Check if user has exceeded threshold
+        return len(self.user_message_history[user_id]) >= self.spam_threshold
+
+    def add_user_message(self, user_id):
+        """Track user message"""
+        if user_id not in self.user_message_history:
+            self.user_message_history[user_id] = []
+        self.user_message_history[user_id].append(datetime.now())
+
+    def can_random_respond(self, channel_id):
+        """Check if can do random response in this channel"""
+        now = datetime.now()
+        if channel_id not in self.last_random_response:
+            self.last_random_response[channel_id] = now - timedelta(minutes=5)
+        
+        # Only allow random responses every 3 minutes per channel
+        time_diff = now - self.last_random_response[channel_id]
+        return time_diff.total_seconds() > 180
+
+    def set_random_response_time(self, channel_id):
+        """Set last random response time"""
+        self.last_random_response[channel_id] = datetime.now()
+
+    # ALL ORIGINAL METHODS RESTORED
+    def clean_message_cache(self):
+        """Remove old messages from cache"""
+        now = datetime.now()
+        expired_messages = [
+            msg_id for msg_id, timestamp in self.bot_message_cache.items()
+            if (now - timestamp).total_seconds() > self.cache_duration
+        ]
+        for msg_id in expired_messages:
+            del self.bot_message_cache[msg_id]
+
+    def is_reply_to_bot(self, message):
+        """Check if message is a reply to bot"""
+        if not message.reference or not message.reference.message_id:
+            return False
+        self.clean_message_cache()
+        return message.reference.message_id in self.bot_message_cache
+
+    def detect_emotional_context(self, message_content):
+        """Detect emotional context"""
+        content_lower = message_content.lower()
+        for emotion, keywords in self.emotional_contexts.items():
+            if any(keyword in content_lower for keyword in keywords):
+                return emotion
+        return 'neutral'
+
+    def modify_response_for_emotion(self, response, emotion):
+        """Modify response based on emotion"""
+        if emotion == 'excited':
+            return response + " You seem excited! 🎉"
+        elif emotion == 'sad':
+            return "Hey, I hope you're doing okay! " + response + " 🤗"
+        elif emotion == 'angry':
+            return "I can sense some frustration. " + response + " Let me know if I can help! 😊"
+        elif emotion == 'confused':
+            return response + " Don't worry, I'm here to help clear things up! 💡"
+        elif emotion == 'happy':
+            return response + " Your good vibes are contagious! 😄"
+        return response
+
+    def is_on_cooldown(self, channel_id, is_reply=False):
+        """Check cooldown with separate timers"""
+        now = datetime.now()
+        if channel_id in self.last_response:
+            time_diff = now - self.last_response[channel_id]
+            cooldown = self.reply_cooldown if is_reply else self.cooldown_seconds
+            return time_diff.total_seconds() < cooldown
+        return False
+
+    def set_cooldown(self, channel_id):
+        """Set cooldown"""
+        self.last_response[channel_id] = datetime.now()
+
+    def update_conversation_memory(self, user_id, message_content):
+        """Track conversation memory"""
+        if user_id not in self.conversation_memory:
+            self.conversation_memory[user_id] = {
+                'topics': [],
+                'last_interaction': datetime.now(),
+                'conversation_count': 0,
+                'favorite_topics': {}
+            }
+        
+        memory = self.conversation_memory[user_id]
+        memory['last_interaction'] = datetime.now()
+        memory['conversation_count'] += 1
+        
+        # Extract topics
+        content_lower = message_content.lower()
+        for pattern, responses in self.trigger_patterns.items():
+            if re.search(pattern, content_lower, re.IGNORECASE):
+                topic = self._extract_topic_from_pattern(pattern)
+                if topic:
+                    memory['topics'].append(topic)
+                    if topic in memory['favorite_topics']:
+                        memory['favorite_topics'][topic] += 1
+                    else:
+                        memory['favorite_topics'][topic] = 1
+        
+        # Keep recent topics only
+        if len(memory['topics']) > 10:
+            memory['topics'] = memory['topics'][-10:]
+
+    def _extract_topic_from_pattern(self, pattern):
+        """Extract topic from pattern"""
+        topic_map = {
+            'food|eat': 'food', 'game|gaming': 'gaming', 'music|song': 'music',
+            'weather|rain': 'weather', 'movie|film': 'entertainment', 'pet|dog|cat': 'pets',
+            'travel|vacation': 'travel', 'sport|football': 'sports', 'relationship|dating': 'relationships'
+        }
+        for key, topic in topic_map.items():
+            if any(word in pattern for word in key.split('|')):
+                return topic
+        return None
+
+    # PERSONALITY SHAPING METHODS - ALL RESTORED
+    def get_user_personality_profile(self, user_id):
+        """Get or create user's personality profile"""
+        if user_id not in self.user_personality_profiles:
+            self.user_personality_profiles[user_id] = {
+                'humor_level': 0.3,      # Default medium humor
+                'sass_level': 0.2,       # Default mild sass
+                'formality': 0.3,        # Default casual
+                'enthusiasm': 0.5,       # Default moderate enthusiasm
+                'helpfulness': 0.8,      # Default helpful
+                'style_preference': 'casual',
+                'custom_responses': {},
+                'learned_preferences': {},
+                'response_history': []
+            }
+        return self.user_personality_profiles[user_id]
+
+    def update_personality_from_feedback(self, user_id, message_id, reaction):
+        """Learn from user reactions to adjust personality"""
+        profile = self.get_user_personality_profile(user_id)
+        
+        if reaction in self.positive_reactions:
+            # User liked this response - reinforce current settings
+            profile['response_history'].append({'message_id': message_id, 'feedback': 'positive'})
+        elif reaction in self.negative_reactions:
+            # User disliked this response - adjust personality slightly
+            profile['response_history'].append({'message_id': message_id, 'feedback': 'negative'})
+            
+            # Slightly adjust traits based on negative feedback
+            if len(profile['response_history']) > 5:
+                recent_negative = sum(1 for r in profile['response_history'][-5:] if r['feedback'] == 'negative')
+                if recent_negative >= 3:  # If 3/5 recent responses were negative, adjust
+                    # Randomly adjust one trait slightly
+                    trait = random.choice(['humor_level', 'sass_level', 'enthusiasm'])
+                    current = profile[trait]
+                    # Adjust by ±0.1, keeping within bounds
+                    adjustment = random.choice([-0.1, 0.1])
+                    profile[trait] = max(0.1, min(1.0, current + adjustment))
+
+    def apply_personality_to_response(self, response, user_id):
+        """Apply user's personality preferences to response"""
+        profile = self.get_user_personality_profile(user_id)
+        
+        # Apply humor level
+        if profile['humor_level'] > 0.5 and random.random() < profile['humor_level']:
+            humor_additions = [" 😄", " 😂", " Haha!", " That's funny!", " 🎭"]
+            response += random.choice(humor_additions)
+        
+        # Apply sass level
+        if profile['sass_level'] > 0.4 and random.random() < profile['sass_level']:
+            sass_additions = [" 😏", " Obviously! 💅", " *smirks*", " Well, duh! 🙄"]
+            if not any(emoji in response for emoji in ['😄', '😂', '🎭']):  # Don't mix humor and sass
+                response += random.choice(sass_additions)
+        
+        # Apply enthusiasm level
+        if profile['enthusiasm'] > 0.6:
+            enthusiasm_multiplier = int(profile['enthusiasm'] * 2)
+            if '!' in response:
+                response = response.replace('!', '!' * min(enthusiasm_multiplier, 3))
+            elif '.' in response:
+                response = response.replace('.', '! ✨')
+        
+        # Apply formality
+        if profile['formality'] > 0.6:
+            # Make more formal
+            response = response.replace("Hey", "Hello")
+            response = response.replace("What's up", "How are you")
+            response = response.replace("Yeah", "Yes")
+        elif profile['formality'] < 0.3:
+            # Make more casual
+            response = response.replace("Hello", "Hey")
+            response = response.replace("How are you", "What's up")
+            response = response.replace("Yes", "Yeah")
+        
+        # Check for custom responses
+        if 'custom_responses' in profile:
+            for trigger, custom_response in profile['custom_responses'].items():
+                if trigger.lower() in response.lower():
+                    return custom_response
+        
+        return response
+
+    def learn_from_user_input(self, user_id, user_message, bot_response):
+        """Learn patterns from user interactions"""
+        profile = self.get_user_personality_profile(user_id)
+        
+        # Track what types of responses the user engages with
+        message_type = 'unknown'
+        if any(word in user_message.lower() for word in ['funny', 'joke', 'lol', 'haha']):
+            message_type = 'humor'
+        elif any(word in user_message.lower() for word in ['help', 'assist', 'support']):
+            message_type = 'helpful'
+        elif any(word in user_message.lower() for word in ['awesome', 'cool', 'great']):
+            message_type = 'positive'
+        
+        if message_type != 'unknown':
+            if message_type not in profile['learned_preferences']:
+                profile['learned_preferences'][message_type] = 0
+            profile['learned_preferences'][message_type] += 1
+            
+            # Adjust personality based on what user engages with most
+            if profile['learned_preferences'][message_type] > 5:
+                if message_type == 'humor':
+                    profile['humor_level'] = min(0.8, profile['humor_level'] + 0.05)
+                elif message_type == 'helpful':
+                    profile['helpfulness'] = min(1.0, profile['helpfulness'] + 0.05)
+
+    def get_personalized_response(self, message, base_response):
+        """Personalize response based on history"""
+        user_id = message.author.id
+        self.update_conversation_memory(user_id, message.content)
+        
+        if user_id in self.conversation_memory:
+            memory = self.conversation_memory[user_id]
+            
+            # Long-time user recognition
+            if memory['conversation_count'] > 15:
+                friendship_responses = [
+                    "Hey there, friend! 😊 ", "Always great chatting with you! 💙 ",
+                    "One of my favorite humans! 🌟 "
+                ]
+                if random.random() < 0.25:
+                    base_response = random.choice(friendship_responses) + base_response
+            
+            # Add follow-up questions
+            if memory['topics'] and random.random() < 0.3:
+                recent_topic = memory['topics'][-1]
+                if recent_topic in self.follow_up_questions:
+                    follow_up = random.choice(self.follow_up_questions[recent_topic])
+                    base_response += f" {follow_up}"
+        
+        return base_response
+
+    async def should_respond(self, message):
+        """Determine if should respond - FIXED SPAM LOGIC"""
+        if message.author.bot:
+            return False
+        
+        if message.content.startswith(self.bot.command_prefix):
+            return False
+        
+        # Check for spam protection
+        if self.is_user_spamming(message.author.id):
+            return False
+        
+        # Direct mentions - always respond (with cooldown)
+        if self.bot.user in message.mentions:
+            return not self.is_on_cooldown(message.channel.id)
+        
+        # Replies to bot - respond with shorter cooldown
+        if self.is_reply_to_bot(message):
+            return not self.is_on_cooldown(message.channel.id, is_reply=True)
+        
+        # Check for bot name mentions
+        content_lower = message.content.lower()
+        for name in self.bot_names:
+            if name in content_lower:
+                return not self.is_on_cooldown(message.channel.id)
+        
+        # CONTROLLED RANDOM RESPONSES - Much more restrictive
+        if (len(message.content.split()) >= 4 and 
+            random.random() < 0.08 and  # Reduced from 0.18 to 0.08
+            self.can_random_respond(message.channel.id) and
+            not self.is_on_cooldown(message.channel.id)):
+            return True
+        
+        return False
+
+    def get_response(self, message):
+        """Enhanced get_response with personality shaping"""
+        content_lower = message.content.lower()
+        user_id = message.author.id
+        
+        # Get base response using existing logic
+        if self.is_reply_to_bot(message):
+            if random.random() < 0.25:
+                base_response = random.choice(self.reply_responses)
+            else:
+                base_response = self._get_contextual_response(content_lower)
+                conversation_starters = [
+                    "That's interesting! ", "I see! ", "Oh, really? ", "Cool! ",
+                    "Nice! ", "Awesome! ", "I hear you! ", "Right on! "
+                ]
+                if random.random() < 0.35:
+                    base_response = random.choice(conversation_starters) + base_response
+        else:
+            base_response = self._get_contextual_response(content_lower)
+        
+        # Apply personalization
+        personalized_response = self.get_personalized_response(message, base_response)
+        
+        # Apply personality shaping
+        shaped_response = self.apply_personality_to_response(personalized_response, user_id)
+        
+        # Apply emotional context
+        emotion = self.detect_emotional_context(content_lower)
+        final_response = self.modify_response_for_emotion(shaped_response, emotion)
+        
+        # Learn from this interaction
+        self.learn_from_user_input(user_id, message.content, final_response)
+        
+        return final_response
+
+    def _get_contextual_response(self, content_lower):
+        """Get contextual response"""
+        clean_content = content_lower
+        for name in self.bot_names:
+            clean_content = clean_content.replace(f"@{name}", "").replace(name, "")
+        clean_content = clean_content.strip()
+        
+        matched_responses = []
+        for pattern, responses in self.trigger_patterns.items():
+            if re.search(pattern, clean_content, re.IGNORECASE):
+                matched_responses.extend(responses)
+        
+        if matched_responses:
+            return random.choice(matched_responses)
+        else:
+            return random.choice(self.positive_responses + self.random_responses)
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        """Listen for messages"""
+        if not await self.should_respond(message):
+            return
+        
+        # Track user message for spam protection
+        self.add_user_message(message.author.id)
+        
+        # If this was a random response, set the timer
+        if (not self.bot.user in message.mentions and 
+            not self.is_reply_to_bot(message) and
+            not any(name in message.content.lower() for name in self.bot_names)):
+            self.set_random_response_time(message.channel.id)
+        
+        response = self.get_response(message)
+        
+        async with message.channel.typing():
+            await asyncio.sleep(random.uniform(0.5, 1.5))
+        
+        try:
+            if self.bot.user in message.mentions or self.is_reply_to_bot(message):
+                bot_message = await message.reply(response, mention_author=False)
+            else:
+                bot_message = await message.channel.send(response)
+            
+            self.bot_message_cache[bot_message.id] = datetime.now()
+            self.set_cooldown(message.channel.id)
+            
+        except discord.errors.Forbidden:
+            pass
+        except Exception as e:
+            print(f"Error sending message: {e}")
+
+    @commands.command(name="chat")
+    async def force_chat(self, ctx, *, message: str):
+        """Force bot to respond"""
+        class MockMessage:
+            def __init__(self, content, author, channel):
+                self.content = content
+                self.author = author
+                self.channel = channel
+                self.mentions = []
+                self.reference = None
+        
+        mock_msg = MockMessage(message, ctx.author, ctx.channel)
+        response = self.get_response(mock_msg)
+        await ctx.send(response)
+
+    @commands.command(name="mystats")
+    async def user_stats(self, ctx):
+        """Show user conversation stats"""
+        user_id = ctx.author.id
+        
+        if user_id not in self.conversation_memory:
+            embed = discord.Embed(
+                title="📊 Your Chat Stats",
+                description="We haven't chatted much yet! Start a conversation with me! 😊",
+                color=discord.Color.blue()
+            )
+        else:
+            memory = self.conversation_memory[user_id]
+            
+            embed = discord.Embed(
+                title=f"📊 Chat Stats for {ctx.author.display_name}",
+                color=discord.Color.green()
+            )
+            
+            embed.add_field(
+                name="💬 Conversations",
+                value=f"{memory['conversation_count']} chats",
+                inline=True
+            )
+            
+            if memory['favorite_topics']:
+                top_topics = sorted(memory['favorite_topics'].items(), key=lambda x: x[1], reverse=True)[:3]
+                topics_str = "\n".join([f"• {topic}: {count} times" for topic, count in top_topics])
+                embed.add_field(
+                    name="🎯 Favorite Topics",
+                    value=topics_str,
+                    inline=False
+                )
+            
+            # Friendship level
+            if memory['conversation_count'] >= 30:
+                friendship = "Best Friend! 💖"
+            elif memory['conversation_count'] >= 15:
+                friendship = "Great Friend! 💙"
+            elif memory['conversation_count'] >= 5:
+                friendship = "Good Friend! 😊"
+            else:
+                friendship = "New Friend! 👋"
+            
+            embed.add_field(
+                name="🤝 Friendship Level",
+                value=friendship,
+                inline=True
+            )
+        
+        await ctx.send(embed=embed)
+
+    @commands.command(name="botpersonality")
+    @commands.has_permissions(manage_guild=True)
+    async def show_personality(self, ctx):
+        """Show bot personality info"""
+        embed = discord.Embed(
+            title="🤖 Advanced AI Personality System",
+            description="I'm packed with personality and remember our conversations!",
+            color=discord.Color.blue()
+        )
+        
+        embed.add_field(
+            name="💬 I Can Chat About",
+            value="• Greetings & Status • Food & Cooking • Gaming • Music\n• Weather • Relationships • Philosophy • Sports\n• Movies & TV • Travel • Pets • And much more!",
+            inline=True
+        )
+        
+        embed.add_field(
+            name="🧠 Smart Features",
+            value="• **Memory system** - I remember you!\n• **Reply conversations** - Respond to replies\n• **Emotional intelligence** - Detect your mood\n• **Personalization** - Adapt to your style",
+            inline=True
+        )
+        
+        embed.add_field(
+            name="🎯 How to Chat",
+            value="• **Mention me**: @Cephalo or say my name\n• **Reply to my messages** - keeps conversations going!\n• **Just talk naturally** - I might join randomly (rarely)\n• Use `!mystats` to see our friendship level!",
+            inline=False
+        )
+        
+        embed.add_field(
+            name="⚙️ Settings",
+            value=f"• Cooldown: {self.cooldown_seconds}s ({self.reply_cooldown}s for replies)\n• Random chat: 8% chance (3min cooldown)\n• Anti-spam: {self.spam_threshold} responses/2min • Memory: 30min active",
+            inline=False
+        )
+        
+        await ctx.send(embed=embed)
+
+    @commands.command(name="testchat")
+    @commands.has_permissions(manage_guild=True)
+    async def test_chat(self, ctx, *, test_message: str = "Hey Cephalo, you're awesome! How are you?"):
+        """Test bot responses"""
+        class MockMessage:
+            def __init__(self, content, author, channel):
+                self.content = content
+                self.author = author
+                self.channel = channel
+                self.mentions = [ctx.bot.user] if any(name in content.lower() for name in self.bot_names) else []
+                self.reference = None
+        
+        mock_msg = MockMessage(test_message, ctx.author, ctx.channel)
+        
+        # Bypass cooldown for testing
+        original_cooldown = self.last_response.get(ctx.channel.id)
+        if ctx.channel.id in self.last_response:
+            del self.last_response[ctx.channel.id]
+        
+        if await self.should_respond(mock_msg):
+            response = self.get_response(mock_msg)
+            emotion = self.detect_emotional_context(test_message)
+            
+            # Find triggered patterns
+            triggered_patterns = []
+            for pattern, responses in self.trigger_patterns.items():
+                if re.search(pattern, test_message.lower(), re.IGNORECASE):
+                    pattern_name = pattern.split('|')[0].replace(r'\b(', '').replace('\\', '')[:25]
+                    triggered_patterns.append(pattern_name + "...")
+            
+            embed = discord.Embed(
+                title="🧪 Personality Test Results",
+                color=discord.Color.green()
+            )
+            embed.add_field(name="📝 Test Message", value=f'"{test_message}"', inline=False)
+            embed.add_field(name="🤖 Bot Response", value=response, inline=False)
+            embed.add_field(name="😊 Emotion Detected", value=emotion.title(), inline=True)
+            
+            if triggered_patterns:
+                embed.add_field(name="🎯 Topics Found", value="\n".join(triggered_patterns[:3]), inline=True)
+                
+        else:
+            embed = discord.Embed(
+                title="🧪 Personality Test Results",
+                description="❌ Bot would not respond to this message.",
+                color=discord.Color.orange()
+            )
+            embed.add_field(name="📝 Test Message", value=f'"{test_message}"', inline=False)
+            embed.add_field(
+                name="❓ Why No Response?",
+                value="• No bot mention or trigger words\n• Channel on cooldown\n• Anti-spam protection\n• Random chance missed (8%)",
+                inline=False
+            )
+        
+        # Restore cooldown
+        if original_cooldown:
+            self.last_response[ctx.channel.id] = original_cooldown
+        
+        await ctx.send(embed=embed)
+
+    @commands.command(name="clearmemory")
+    async def clear_memory(self, ctx):
+        """Clear your conversation memory"""
+        user_id = ctx.author.id
+        
+        if user_id in self.conversation_memory:
+            del self.conversation_memory[user_id]
+            await ctx.send("🧠 Your conversation memory has been cleared! Starting fresh! ✨")
+        else:
+            await ctx.send("🤔 No conversation memory found to clear!")
+
+    @commands.command(name="setcooldown")
+    @commands.has_permissions(administrator=True)
+    async def set_cooldown_cmd(self, ctx, seconds: int):
+        """Set response cooldown"""
+        if seconds < 5:
+            return await ctx.send("❌ Cooldown must be at least 5 seconds!")
+        
+        if seconds > 300:
+            return await ctx.send("❌ Cooldown cannot exceed 5 minutes!")
+        
+        self.cooldown_seconds = seconds
+        
+        embed = discord.Embed(
+            title="⏱️ Cooldown Updated",
+            description=f"Response cooldown set to {seconds} seconds per channel.",
+            color=discord.Color.green()
+        )
+        
+        await ctx.send(embed=embed)
+
+    # PERSONALITY SHAPING COMMANDS - ALL RESTORED
+    @commands.command(name="personality")
+    async def show_personality_settings(self, ctx):
+        """Show your current personality settings for the bot"""
+        user_id = ctx.author.id
+        profile = self.get_user_personality_profile(user_id)
+        
+        embed = discord.Embed(
+            title=f"🎭 Your Bot Personality Settings",
+            description="Here's how I'm configured to talk with you!",
+            color=discord.Color.purple()
+        )
+        
+        # Show current trait levels
+        traits_display = []
+        for trait, value in profile.items():
+            if trait in self.available_traits:
+                # Convert value to descriptive text
+                for level_name, level_value in self.available_traits[trait].items():
+                    if abs(value - level_value) < 0.15:  # Find closest match
+                        traits_display.append(f"**{trait.replace('_', ' ').title()}**: {level_name.title()}")
+                        break
+        
+        embed.add_field(
+            name="🎚️ Personality Traits",
+            value="\n".join(traits_display) if traits_display else "Default settings",
+            inline=True
+        )
+        
+        embed.add_field(
+            name="🎨 Style Preference",
+            value=f"**{profile['style_preference'].title()}**",
+            inline=True
+        )
+        
+        # Show learning stats
+        if profile['learned_preferences']:
+            learned = "\n".join([f"• {k.title()}: {v} interactions" for k, v in profile['learned_preferences'].items()])
+            embed.add_field(
+                name="🧠 What I've Learned About You",
+                value=learned,
+                inline=False
+            )
+        
+        embed.add_field(
+            name="⚙️ How to Customize",
+            value="• `!settrait <trait> <level>` - Adjust personality\n• `!setstyle <style>` - Change conversation style\n• `!teachresponse <trigger> <response>` - Teach custom responses\n• React to my messages to train me! 👍👎",
+            inline=False
+        )
+        
+        await ctx.send(embed=embed)
+
+    @commands.command(name="settrait")
+    async def set_personality_trait(self, ctx, trait: str = None, level: str = None):
+        """Set a personality trait (humor, sass, formality, enthusiasm, helpfulness)"""
+        if not trait or not level:
+            embed = discord.Embed(
+                title="🎚️ Set Personality Trait",
+                description="Customize how I interact with you!",
+                color=discord.Color.blue()
+            )
+            
+            trait_info = []
+            for trait_name, levels in self.available_traits.items():
+                level_names = list(levels.keys())
+                trait_info.append(f"**{trait_name.replace('_', ' ').title()}**: {', '.join(level_names)}")
+            
+            embed.add_field(
+                name="Available Traits & Levels",
+                value="\n".join(trait_info),
+                inline=False
+            )
+            
+            embed.add_field(
+                name="Usage",
+                value="```!settrait humor high\n!settrait formality casual\n!settrait sass medium```",
+                inline=False
+            )
+            
+            return await ctx.send(embed=embed)
+        
+        trait = trait.lower().replace(' ', '_')
+        level = level.lower()
+        
+        if trait not in self.available_traits:
+            return await ctx.send(f"❌ Unknown trait! Available: {', '.join(self.available_traits.keys())}")
+        
+        if level not in self.available_traits[trait]:
+            available_levels = ', '.join(self.available_traits[trait].keys())
+            return await ctx.send(f"❌ Invalid level for {trait}! Available: {available_levels}")
+        
+        # Update user's personality profile
+        user_id = ctx.author.id
+        profile = self.get_user_personality_profile(user_id)
+        profile[trait] = self.available_traits[trait][level]
+        
+        embed = discord.Embed(
+            title="✅ Personality Updated!",
+            description=f"Set **{trait.replace('_', ' ').title()}** to **{level.title()}**",
+            color=discord.Color.green()
+        )
+        
+        embed.add_field(
+            name="🧪 Test It Out",
+            value="Try chatting with me to see the difference! Use `!testchat` to preview responses.",
+            inline=False
+        )
+        
+        await ctx.send(embed=embed)
+
+    @commands.command(name="setstyle")
+    async def set_conversation_style(self, ctx, style: str = None):
+        """Set conversation style (formal, casual, funny, sarcastic)"""
+        if not style:
+            embed = discord.Embed(
+                title="🎨 Conversation Styles",
+                description="Choose how I should talk with you!",
+                color=discord.Color.blue()
+            )
+            
+            styles_info = [
+                "**Formal** - Professional and polite",
+                "**Casual** - Relaxed and friendly (default)",
+                "**Funny** - Jokes and humor focus",
+                "**Sarcastic** - Witty and sassy responses"
+            ]
+            
+            embed.add_field(
+                name="Available Styles",
+                value="\n".join(styles_info),
+                inline=False
+            )
+            
+            embed.add_field(
+                name="Usage",
+                value="```!setstyle funny\n!setstyle formal\n!setstyle casual```",
+                inline=False
+            )
+            
+            return await ctx.send(embed=embed)
+        
+        style = style.lower()
+        
+        if style not in self.style_templates:
+            available_styles = ', '.join(self.style_templates.keys())
+            return await ctx.send(f"❌ Invalid style! Available: {available_styles}")
+        
+        # Update user's style preference
+        user_id = ctx.author.id
+        profile = self.get_user_personality_profile(user_id)
+        profile['style_preference'] = style
+        
+        # Give a sample response in the new style
+        sample_responses = self.style_templates[style]['greetings']
+        sample = random.choice(sample_responses)
+        
+        embed = discord.Embed(
+            title=f"✅ Style Changed to {style.title()}!",
+            description=f"Here's how I'll talk now: *{sample}*",
+            color=discord.Color.green()
+        )
+        
+        await ctx.send(embed=embed)
+
+    @commands.command(name="teachresponse")
+    async def teach_custom_response(self, ctx, trigger: str = None, *, response: str = None):
+        """Teach the bot a custom response to specific words/phrases"""
+        if not trigger or not response:
+            embed = discord.Embed(
+                title="🎓 Teach Custom Responses",
+                description="Train me to respond with your custom messages!",
+                color=discord.Color.blue()
+            )
+            
+            embed.add_field(
+                name="Usage",
+                value="```!teachresponse \"your name\" \"Hey there, [name]! 😊\"\n!teachresponse \"pizza\" \"Pizza is life! 🍕\"```",
+                inline=False
+            )
+            
+            embed.add_field(
+                name="Tips",
+                value="• Use quotes around multi-word triggers\n• I'll respond with your custom message when I see the trigger\n• Keep responses friendly and appropriate!",
+                inline=False
+            )
+            
+            return await ctx.send(embed=embed)
+        
+        user_id = ctx.author.id
+        profile = self.get_user_personality_profile(user_id)
+        
+        # Initialize custom_responses if it doesn't exist
+        if 'custom_responses' not in profile:
+            profile['custom_responses'] = {}
+        
+        # Limit custom responses per user
+        if len(profile['custom_responses']) >= 10:
+            return await ctx.send("❌ You can only have 10 custom responses! Use `!forgetresponse <trigger>` to remove some.")
+        
+        profile['custom_responses'][trigger.lower()] = response
+        
+        embed = discord.Embed(
+            title="🎓 Response Learned!",
+            description=f"I'll now respond with your custom message when I see **{trigger}**",
+            color=discord.Color.green()
+        )
+        
+        embed.add_field(
+            name="Test Response",
+            value=f"*{response}*",
+            inline=False
+        )
+        
+        await ctx.send(embed=embed)
+
+    @commands.command(name="forgetresponse")
+    async def forget_custom_response(self, ctx, *, trigger: str):
+        """Remove a custom response"""
+        user_id = ctx.author.id
+        profile = self.get_user_personality_profile(user_id)
+        
+        if 'custom_responses' not in profile or trigger.lower() not in profile['custom_responses']:
+            return await ctx.send("❌ I don't have a custom response for that trigger!")
+        
+        removed_response = profile['custom_responses'].pop(trigger.lower())
+        
+        embed = discord.Embed(
+            title="🗑️ Response Forgotten",
+            description=f"Removed custom response for **{trigger}**",
+            color=discord.Color.orange()
+        )
+        
+        embed.add_field(
+            name="Removed Response",
+            value=f"*{removed_response}*",
+            inline=False
+        )
+        
+        await ctx.send(embed=embed)
+
+    @commands.command(name="resetpersonality")
+    async def reset_personality(self, ctx):
+        """Reset your personality settings to default"""
+        user_id = ctx.author.id
+        
+        if user_id in self.user_personality_profiles:
+            del self.user_personality_profiles[user_id]
+        
+        embed = discord.Embed(
+            title="🔄 Personality Reset",
+            description="Your personality settings have been reset to default! I'll start learning your preferences fresh.",
+            color=discord.Color.blue()
+        )
+        
+        embed.add_field(
+            name="Fresh Start",
+            value="Chat with me and use `!settrait` and `!setstyle` to customize how I interact with you!",
+            inline=False
+        )
+        
+        await ctx.send(embed=embed)
+
+    @commands.Cog.listener()
+    async def on_reaction_add(self, reaction, user):
+        """Learn from user reactions to bot messages"""
+        # Don't learn from bot reactions
+        if user.bot:
+            return
+        
+        # Check if reaction is on a bot message
+        if reaction.message.author != self.bot.user:
+            return
+        
+        # Check if it's in our message cache (recent bot message)
+        if reaction.message.id not in self.bot_message_cache:
+            return
+        
+        # Update personality based on reaction
+        self.update_personality_from_feedback(user.id, reaction.message.id, str(reaction.emoji))
+        
+        # Optional: Acknowledge positive feedback
+        if str(reaction.emoji) in self.positive_reactions and random.random() < 0.3:  # 30% chance
+            acknowledgments = ["Thanks! 😊", "Glad you liked that! 💙", "😄", "✨"]
+            try:
+                await reaction.message.reply(random.choice(acknowledgments), mention_author=False, delete_after=10)
+            except:
+                pass  # Ignore if we can't send message
+
+async def setup(bot):
+    """Load the AIPersonality cog"""
+    await bot.add_cog(AIPersonality(bot))
+    print("✅ Advanced AIPersonality cog loaded successfully")
